@@ -355,6 +355,7 @@ int dsi_panel_tx_cmd_set(struct dsi_panel *panel,
 				enum dsi_cmd_set_type type);
 int dsi_panel_update_backlight(struct dsi_panel *panel,
 				u32 bl_lvl);
+
 int dsi_panel_get_cmd_pkt_count(const char *data, u32 length, u32 *cnt);
 int dsi_panel_alloc_cmd_packets(struct dsi_panel_cmd_set *cmd,
 				u32 packet_count);
