@@ -339,7 +339,6 @@ static void dsi_bridge_enable(struct drm_bridge *bridge)
 			sde_connector_schedule_status_work(display->drm_conn,
 				true);
 	}
-
 }
 
 static void dsi_bridge_disable(struct drm_bridge *bridge)
@@ -386,11 +385,10 @@ static void dsi_bridge_post_disable(struct drm_bridge *bridge)
 
 	mi_cfg = &c_bridge->display->panel->mi_cfg;
 
-	if (mi_cfg->fod_dimlayer_enabled) {
+	if (mi_cfg->fod_dimlayer_enabled)
 		power_mode = sde_connector_get_lp(c_bridge->display->drm_conn);
-	} else {
+	else
 		power_mode = MI_DRM_BLANK_POWERDOWN;
-	}
 
 	notify_data.data = &power_mode;
 	notify_data.id = MSM_DRM_PRIMARY_DISPLAY;

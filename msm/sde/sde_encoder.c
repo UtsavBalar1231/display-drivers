@@ -2343,6 +2343,7 @@ static void sde_encoder_input_event_handler(struct input_handle *handle,
 	SDE_EVT32_VERBOSE(DRMID(drm_enc));
 
 	disp_thread = &priv->disp_thread[sde_enc->crtc->index];
+
 	kthread_queue_work(&disp_thread->worker,
 				&sde_enc->touch_notify_work);
 
@@ -3170,10 +3171,10 @@ error:
 
 static void _sde_encoder_input_disconnect(struct input_handle *handle)
 {
-	SDE_EVT32(handle, SDE_EVTLOG_FUNC_EXIT);
-	input_close_device(handle);
-	input_unregister_handle(handle);
-	kfree(handle);
+	 SDE_EVT32(handle, SDE_EVTLOG_FUNC_EXIT);
+	 input_close_device(handle);
+	 input_unregister_handle(handle);
+	 kfree(handle);
 }
 
 /**

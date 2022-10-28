@@ -32,7 +32,6 @@ void frame_stat_notify(int data)
 
 	fm_stat.skip_count = 0;
 	fm_stat.last_fps = data;
-	return;
 }
 
 void calc_fps(u64 duration, int input_event)
@@ -64,7 +63,7 @@ void calc_fps(u64 duration, int input_event)
 		goto exit;
 	}
 
-	if(!fm_stat.start) {
+	if (!fm_stat.start) {
 		fm_stat.last_sampled_time_us = current_time_us;
 		fm_stat.start = true;
 	}
@@ -77,7 +76,8 @@ void calc_fps(u64 duration, int input_event)
 		fm_stat.last_frame_commit_time_us = current_time_us;
 		if (diff > LONG_FRAME_INTERVAL) {
 			fm_stat.skip_count++;
-			pr_debug("%s: Long frame interval, frame interval[%lld ms], count[%d]\n", __func__, diff/NANO_TO_MICRO, fm_stat.skip_count);
+			pr_debug("%s: Long frame interval, frame interval[%lld ms], count[%d]\n",
+				 __func__, diff/NANO_TO_MICRO, fm_stat.skip_count);
 			if (fm_stat.skip_count > LONG_INTERVAL_FRAME_COUNT) {
 				/* Sometime  app refresh in low fps, here set 50hz */
 				frame_stat_notify(IDLE_FPS);
@@ -144,7 +144,8 @@ void frame_stat_collector(u64 duration, enum stat_item item)
 		break;
 	case GET_INPUT_FENCE_TS:
 		fm_stat.get_input_fence_ts = now;
-		pr_debug("%s: get_input_fence_ts = %lld, duration = %lld \n", __func__, fm_stat.get_input_fence_ts, duration);
+		pr_debug("%s: get_input_fence_ts = %lld, duration = %lld\n",
+			 __func__, fm_stat.get_input_fence_ts, duration);
 		fm_stat.input_fence_duration = duration;
 		break;
 	case VBLANK_TS:
@@ -164,8 +165,6 @@ void frame_stat_collector(u64 duration, enum stat_item item)
 	default:
 		break;
 	}
-
-	return;
 }
 
 
